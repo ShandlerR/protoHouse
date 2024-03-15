@@ -34,48 +34,37 @@ function createSkillBoxes(amount)
     input.addEventListener("focusout", function(e) { removeCheckInputForm(e); saveStatus(e); returnStatus(e); });
     
     // When the mouse leaves, save only if the user is not trying to change data (Focus).
-    input.addEventListener("mouseleave", function(e) { if(saveStatus(e) == true) { returnStatus(e) } });
+    input.addEventListener("mouseleave", function(e) { if(document.activeElement !== e.target) { saveStatus(e); returnStatus(e) } });
     
   }
 }
 
 /*
-  Saves the Level and Mod if the User is not focusing on this element.
-  Returns true if a save was made successful. Returns false if saving was not allowed at this moment.
+simply saves the level and mod. This assumes the display is in the form
+level(mod) or _(_) where _ represents blank space. This function Understands that _ represents a 0. 
 */
-function saveStatus(event)
+
+ function saveStatus(event)
 {
-  if(document.activeElement !== event.target)
-  { 
-    // The user is not focusing, and the mouse is not hovering over this
-    const valuesArray = event.target.value.split("(");
+  const valuesArray = event.target.value.split("(");
 
-    valuesArray[1] = valuesArray[1].replace("(", "");
-    valuesArray[1] = valuesArray[1].replace(")", "");
+  valuesArray[1] = valuesArray[1].replace("(", "");
+  valuesArray[1] = valuesArray[1].replace(")", "");
 
-    if (valuesArray[0] === "")
-    {
-      valuesArray[0] = "0";
-    }
-
-    if (valuesArray[1] === "")
-    {
-      valuesArray[1] = "0";
-    }
-
-    event.target.dataset.level = valuesArray[0];
-    event.target.dataset.mod = valuesArray[1];
-
-    return true;
-  }
-  else 
+  if (valuesArray[0] === "")
   {
-    //The user did not drop focus, nothing happens
-    return false;
+    valuesArray[0] = "0";
   }
+
+  if (valuesArray[1] === "")
+  {
+    valuesArray[1] = "0";
+  }
+
+  event.target.dataset.level = valuesArray[0];
+  event.target.dataset.mod = valuesArray[1];
   
 }
-
 
 // simply displays the Level and Mod in form of level(mod)
 function setStatus(event)
@@ -109,6 +98,11 @@ function checkInputForm(event)
     //reset the text
     setStatus(event);
   }
+  else 
+  {
+    // save the valid text so far
+    saveStatus(event);
+  }
 }
 
 // removes text validation code.
@@ -116,6 +110,5 @@ function removeCheckInputForm(event)
 {
   event.target.removeEventListener("input", checkInputForm);
 }
-
 
 createSkillBoxes(10);
