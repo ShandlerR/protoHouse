@@ -33,7 +33,7 @@ function createSkillBoxes(amount)
     // When the user clicks off: Stop Validating text, save Level and Mod, then return to form "Value" (A single Number representing Level + Mod).
     input.addEventListener("focusout", function(e) { removeCheckInputForm(e); saveStatus(e); returnStatus(e); });
     
-    // When the mouse leaves, save only if the user is not trying to change data (Focus).
+    // When the mouse leaves, save & reset only if the user is not focusing.
     input.addEventListener("mouseleave", function(e) { if(document.activeElement !== e.target) { saveStatus(e); returnStatus(e) } });
     
   }
