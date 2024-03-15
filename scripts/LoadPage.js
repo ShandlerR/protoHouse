@@ -1,4 +1,4 @@
-const regex = new RegExp(/\d*\(\d*\)/);
+const regex = new RegExp(/\d*\(\d*\)$/);
 
 // Creates a single Container Containing "Amount" of inputs. 
 function createSkillBoxes(amount)
