@@ -27,10 +27,10 @@ function createSkillBoxes(amount)
     // When the user Hovers, change the text
     input.addEventListener("mouseenter", function(e) { setStatus(e) })
 
-    // When the User clicks, validate that the data never leaves form _(_).
+    // When the User clicks, validate that the data never leaves form Level(Mod).
     input.addEventListener("focus", function(e) { setCheckInputForm(e) });
 
-    // When the user clicks off: Stop Validating text, save Level and Mod, then return to form _ (Single Number).
+    // When the user clicks off: Stop Validating text, save Level and Mod, then return to form "Value" (A single Number representing Level + Mod).
     input.addEventListener("focusout", function(e) { removeCheckInputForm(e); saveStatus(e); returnStatus(e); });
     
     // When the mouse leaves, save only if the user is not trying to change data (Focus).
