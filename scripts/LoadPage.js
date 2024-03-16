@@ -72,12 +72,24 @@ level(mod) or _(_) where _ represents blank space. This function Understands tha
   
 }
 
+function getAsInt(number)
+{
+  let newNumber = parseInt(number);
+
+  if(isNaN(newNumber))
+  {
+    newNumber = 0;
+  }
+
+  return newNumber;
+}
+
 // simply displays the Level and Mod in form of level(mod)
 function setStatus(event)
 {
   let dataset = event.target.dataset;
-  let level = parseInt(dataset.level);
-  let mod = parseInt(dataset.mod);
+  let level = getAsInt(dataset.level);
+  let mod = getAsInt(dataset.mod);
 
   event.target.value = `${level}(${mod})`;
 }
@@ -85,7 +97,19 @@ function setStatus(event)
 // Return the display to it's original Form of a single number. (Level = 5, mod = 3, then the display should say "8")
 function returnStatus(event)
 {
-  event.target.value = (parseInt(event.target.dataset.level) + parseInt(event.target.dataset.mod));
+  const level = getAsInt(event.target.dataset.level);
+  const mod = getAsInt(event.target.dataset.mod);
+
+  if(level == NaN)
+  {
+    level = 0;
+  }
+  if (mod == NaN)
+  {
+    mod = 0;
+  }
+
+  event.target.value = (level + mod);
 }
 
 // Adds an event listener that guarentees the display is always in the form of level(mod). (Or At least "_(_)" where _ is blank space)
