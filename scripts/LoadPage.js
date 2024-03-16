@@ -1,26 +1,32 @@
-const regex = new RegExp(/^\d*\(\d*\)$/);
-
+const regex = new RegExp(/^(\d|\-)*\((\d|\-)*\)$/);
 // Creates a single Container Containing "Amount" of inputs. 
 function createSkillBoxes(amount)
 {
   // Create the Parent Container
-  const container = document.createElement("div");
-  document.body.appendChild(container);
 
   for(let i = 0; i < amount; i++)
   {
-    // Create the input element
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+
+    //Create Skill Name Display
+    const name = document.createElement("input");
+    name.setAttribute("type", "text");
+
+    // Create the Stat Display
     const input = document.createElement("input");
     input.setAttribute("type", "text");
-
 
     // set default values
     input.dataset.level = "2";
     input.dataset.mod = "3";
-    
+
     // assign information to frontend display
+    name.setAttribute("value", "Fireball");
     input.setAttribute("value", (parseInt(input.dataset.level) + parseInt(input.dataset.mod)));
+    
     container.appendChild(input);
+    container.appendChild(name);
 
     // Add all the event listeners
 
@@ -111,4 +117,4 @@ function removeCheckInputForm(event)
   event.target.removeEventListener("input", checkInputForm);
 }
 
-createSkillBoxes(10);
+createSkillBoxes(20);
