@@ -22,7 +22,7 @@ function createSkillBoxes(amount)
     input.dataset.mod = "3";
 
     // assign information to frontend display
-    name.setAttribute("value", "Patrick Smooch");
+    name.setAttribute("value", "Fireball");
     input.setAttribute("value", (parseInt(input.dataset.level) + parseInt(input.dataset.mod)));
     
     container.appendChild(input);
