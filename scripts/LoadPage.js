@@ -141,4 +141,4 @@ function removeCheckInputForm(event)
   event.target.removeEventListener("input", checkInputForm);
 }
 
-createSkillBoxes(20);
+createSkillBoxes(10);

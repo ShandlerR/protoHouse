@@ -22,6 +22,7 @@ h2
     margin-top: 0;
     text-align: center;
     padding: 0.5em;
+    margin-bottom: 0px;
     border-bottom: black solid 2px;
     font-size: var(--headerSize);
 }
@@ -30,8 +31,8 @@ div
 {
     align-self: center;
     display: block;
-    margin: 10px;
 }
+
 input 
 {
     font-size: var(--fontSize);
