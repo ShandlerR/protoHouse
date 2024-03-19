@@ -1,6 +1,8 @@
 const regex = new RegExp(/^(\d|\-)*\((\d|\-)*\)$/);
+const items = ["Jump", "Armour", "Polearms", "Dodge", "Strength", "Climbing", "Awareness", "Sword", "Common Speech"]
+
 // Creates a single Container Containing "Amount" of inputs. 
-function createSkillBoxes(amount)
+function createSkillBoxes(amount, array)
 {
   // Create the Parent Container
 
@@ -18,17 +20,37 @@ function createSkillBoxes(amount)
     input.setAttribute("type", "text");
 
     // set default values
-    input.dataset.level = "2";
-    input.dataset.mod = "3";
 
+    let text = items.pop(); 
+    let level = 0;
+    let mod = 0;
+
+    if(text == undefined)
+    {
+      name.setAttribute("value", "");
+      name.style.border = "2px solid var(--textColor)";
+    }
+    else
+    {
+      name.setAttribute("value", text);
+
+      level = Math.floor(Math.random() * 4);
+      mod = Math.floor(Math.random() * 3);;
+    }
+
+    input.dataset.level = level.toString();
+    input.dataset.mod = mod.toString();
     // assign information to frontend display
-    name.setAttribute("value", "Fireball");
+    
     input.setAttribute("value", (parseInt(input.dataset.level) + parseInt(input.dataset.mod)));
     
     container.appendChild(input);
     container.appendChild(name);
 
     // Add all the event listeners
+
+    // check to see if the name is empty
+    name.addEventListener("input", checkForEmptyName);
 
     // When the user Hovers, change the text
     input.addEventListener("mouseenter", function(e) { setStatus(e) })
@@ -141,4 +163,18 @@ function removeCheckInputForm(event)
   event.target.removeEventListener("input", checkInputForm);
 }
 
-createSkillBoxes(10);
+function checkForEmptyName(event)
+{
+  if(event.target.value == "")
+  {
+    event.target.style.border = "2px solid var(--textColor)";
+    console.log("adding border");
+  }
+  else 
+  {
+    event.target.style.border = "none";
+    console.log("removing border")
+  }
+}
+
+createSkillBoxes(10, items);
