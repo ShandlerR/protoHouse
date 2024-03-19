@@ -28,6 +28,11 @@ h2
     font-size: var(--headerSize);
 }
 
+body > div:nth-child(3)
+{
+    margin-top: 1em;
+}
+
 div
 {
     align-self: center;
